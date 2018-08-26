@@ -1,19 +1,28 @@
 const express = require("express");
-const cors =require("cors");
-const server =express();
-const bodyParser =require("body-parser");
-const {connection}= require("./Connection");
-const uuidv4 =require("uuid/v4");
-const fs =require("fs");
+const cors = require("cors");
+const compression = require("compression")
+const helmet = require("helmet")
+const bodyParser = require("body-parser");
+const {connection} = require("./Connection");
+const fs = require("fs");
+const uuidv4 = require("uuid/v4");
+const server = express();
+const port = process.env.PORT || 8000;
 
-const PORT = process.env.PORT||8000;
-server.listen(PORT,()=>{
-    console.log(`Server is running on Localhost: ${PORT}`);
-})
+server.listen(port, () => {
+   console.log(`server is running on localhost: ${port}`);
+});
 
-server.use(express.static('public'));
+server.use(express.static("public"));
 server.use(bodyParser.json());
-server.use(cors({origin:"http://localhost:3000"}));
+server.use(cors({ origin: "http://localhost:3000"}));
+server.use(compression());
+server.use(helmet());
+
+server.get("/", (Request, Response) => {
+   Response.send("you are on the master branch");
+
+})
 
 server.get("/get/jokes",(request,response)=>{
     connection.query(`select * from joke `,(error,results)=>{
