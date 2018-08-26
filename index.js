@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const compression = require("compression")
-const helmet = require("helmet")
+const compression = require("compression");
+const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const {connection} = require("./Connection");
 const fs = require("fs");
@@ -22,7 +22,7 @@ server.use(helmet());
 server.get("/", (request, response) => {
    response.send("you are on the master branch");
 
-})
+});
 
 server.get("/get/jokes",(request,response)=>{
     connection.query(`select * from joke `,(error,results)=>{
