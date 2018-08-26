@@ -19,8 +19,8 @@ server.use(cors({ origin: "http://localhost:3000"}));
 server.use(compression());
 server.use(helmet());
 
-server.get("/", (Request, Response) => {
-   Response.send("you are on the master branch");
+server.get("/", (request, response) => {
+   response.send("you are on the master branch");
 
 })
 
