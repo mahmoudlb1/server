@@ -8,6 +8,7 @@ const fs = require("fs");
 const uuidv4 = require("uuid/v4");
 const server = express();
 const port = process.env.PORT || 8000;
+const {SHA256}= require ("crypto JS")
 
 server.listen(port, () => {
    console.log(`server is running on localhost: ${port}`);
