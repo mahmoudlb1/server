@@ -16,15 +16,19 @@ server.listen(port, () => {
 server.use(express.static("public"));
 server.use(bodyParser.json());
 server.use(cors({ origin: "http://localhost:3000"}));
-server.use(compression());
-server.use(helmet());
 
 server.get("/", (request, response) => {
-   response.send("you are on the master branch");
-
+response.send("on master branch")
 });
 
-server.get("/get/jokes",(request,response)=>{
+server.get("/password", (request, response) =>{
+    const stupidPassword = "password123";
+    const hashedPassword = SHA256(stupidPassword);
+    console.log({hashedPassword});
+ });
+
+
+server.get("/get/joke",(request,response)=>{
     connection.query(`select * from joke `,(error,results)=>{
     if(error){
         showError(error,response);
